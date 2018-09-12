@@ -1,0 +1,38 @@
+<!--
+  Generated template for the EditWishFulfillmentStateModalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Editar estado de execução do desejo</ion-title>
+    <ion-buttons start="" class="bar-buttons bar-buttons-md" (click)="closeModal()">
+      <button ion-button="" class="disable-hover bar-button bar-button-md bar-button-default bar-button-default-md">
+        <span class="button-inner">
+          <span color="primary" ion-text="" showwhen="ios" class="text text-md text-md-primary hidden-show-when">Cancel</span>
+          <ion-icon name="md-close" role="img" showwhen="android, windows" class="icon icon-md ion-md-close" aria-label="close"></ion-icon>
+        </span>
+        <div class="button-effect"></div>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div id="wish_fulfillment_stage" *ngIf="wish">
+    <h3 id="wish_fulfillment_stage_title">
+      <strong>Estado de execução do desejo:</strong>
+    </h3>
+    <ion-item>
+      <!-- <ion-input #wishTitleInput [value]="wish.title" (keyup.enter)="saveWishTitle(wishTitleInput.value)"> clearInput></ion-input> -->
+    </ion-item>
+    <button clear="" ion-button="" item-end="" (click)="saveWishFulfillmentStage()" class="disable-hover item-button button button-ios button-clear button-clear-ios">
+      <span class="button-inner">Guardar</span>
+      <div class="button-effect"></div>
+    </button>
+  </div>
+</ion-content>

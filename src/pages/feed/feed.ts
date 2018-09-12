@@ -1,5 +1,4 @@
-import { EditPage } from './../edit/edit';
-import { MovieProvider } from '../../providers/movie/movie';
+import { EditPage } from '../edit/edit';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 
@@ -15,7 +14,6 @@ import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-an
   selector: 'page-feed',
   templateUrl: 'feed.html',
   providers: [
-    MovieProvider
   ]
 })
 export class FeedPage {
@@ -28,12 +26,13 @@ export class FeedPage {
   public wish = {
     id:"aa8sf765a",
     createdAt: this.getCurrentDate(),
-    wishReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultricies, nisi nec luctus porta, justo elitjoin efficitur ligula, in interdum est diam vitae dolor. Duis dignissim nisl eleifend risus bibendum, nec vestibulum massa congue.",
-    wishDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultricies, nisi nec luctus porta, justo elit efficitur ligula, in interdum est diam vitae dolor. Duis dignissim nisl eleifend risus bibendum, nec vestibulum massa congue. Mauris pretium, sem sit amet gravida porttitor, purus ante porta odio, in convallis lacus ipsum et ante. Maecenas mattis metus urna, at placerat arcu auctor in. Phasellus vel enim odio. Phasellus vel venenatis ligula. Mauris porttitor, ante nec fermentum laoreet, massa enim eleifend felis, non malesuada neque turpis a tortor. Ut nec mauris tempus, posuere eros eget, congue nulla.L Aenean feugiat fermentum ante sed ultrices. Curabitur consectetur sollicitudin faucibus. Nullam aliquam nunc ac suscipit fringilla. Donec nec dui et odio molestie rutrum.",
+    title:"Um desejo a ser completado",
+    reason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultricies, nisi nec luctus porta, justo elitjoin efficitur ligula, in interdum est diam vitae dolor. Duis dignissim nisl eleifend risus bibendum, nec vestibulum massa congue.",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultricies, nisi nec luctus porta, justo elit efficitur ligula, in interdum est diam vitae dolor. Duis dignissim nisl eleifend risus bibendum, nec vestibulum massa congue. Mauris pretium, sem sit amet gravida porttitor, purus ante porta odio, in convallis lacus ipsum et ante. Maecenas mattis metus urna, at placerat arcu auctor in. Phasellus vel enim odio. Phasellus vel venenatis ligula. Mauris porttitor, ante nec fermentum laoreet, massa enim eleifend felis, non malesuada neque turpis a tortor. Ut nec mauris tempus, posuere eros eget, congue nulla.L Aenean feugiat fermentum ante sed ultrices. Curabitur consectetur sollicitudin faucibus. Nullam aliquam nunc ac suscipit fringilla. Donec nec dui et odio molestie rutrum.",
     fulfillmentState: "pending",
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private movieProvider: MovieProvider, public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,  public loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
@@ -50,10 +49,13 @@ export class FeedPage {
     if (dd < 10) {
       finalDate += '0' + dd;
     }
+    finalDate += dd 
     if (mm < 10) {
       finalDate += '0' + mm;
     }
-    return dd + '/' + mm + '/' + yyyy;
+    finalDate += ('/'+mm)
+    finalDate += ('/'+yyyy)
+    return finalDate;
   }
 
 
@@ -89,7 +91,6 @@ export class FeedPage {
   }
 
   navToEditPage(wish) {
-    console.log("navToEditPage(wish) ",wish)
     this.navCtrl.push(EditPage, { wish:wish })
   }
 

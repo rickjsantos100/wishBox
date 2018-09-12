@@ -1,5 +1,8 @@
+import { EditWishTitleModalPage } from '../modals/edit-wish-title-modal/edit-wish-title-modal';
+import { EditWishDescriptionModalPage } from '../modals/edit-wish-description-modal/edit-wish-description-modal';
+import { EditWishReasonModalPage } from '../modals/edit-wish-reason-modal/edit-wish-reason-modal';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
 /**
  * Generated class for the EditPage page.
@@ -17,12 +20,26 @@ export class EditPage {
 
   public wish;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams ) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalController: ModalController) {
   }
 
   ionViewDidEnter() {
-    console.log("edit.ts ", this.navParams.get("wish"))
     this.wish = this.navParams.get("wish")
+  }
+
+  editWishTitle(){
+    const modal = this.modalController.create(EditWishTitleModalPage,{wish:this.wish});
+    modal.present();
+  }
+
+  editWishReason(){
+    const modal = this.modalController.create(EditWishReasonModalPage,{wish:this.wish});
+    modal.present();
+  }
+
+  editWishDescription(){
+    const modal = this.modalController.create(EditWishDescriptionModalPage,{wish:this.wish});
+    modal.present();
   }
 
 

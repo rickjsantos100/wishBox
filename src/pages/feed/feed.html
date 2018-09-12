@@ -21,7 +21,7 @@
   <ion-card>
     <ion-item id="card_header">
       <h2 class="wish_title">
-        <strong>Um desejo a ser completado</strong>
+        <strong>{{wish.title}}</strong>
       </h2>
       <p class="wish_creation_date">Criado a
         <strong>{{wish.createdAt}}</strong>
@@ -29,6 +29,7 @@
       <ion-badge class="wish_state pending" *ngIf="wish.fulfillmentState === 'pending'">Pendente</ion-badge>
       <ion-badge class="wish_state in-progress" *ngIf="wish.fulfillmentState === 'inProgress'">Em progresso</ion-badge>
       <ion-badge class="wish_state concluded" *ngIf="wish.fulfillmentState === 'concluded'">Concluido</ion-badge>
+      <ion-badge class="wish_state rejected" *ngIf="wish.fulfillmentState === 'rejected'">Rejeitado</ion-badge>
     </ion-item>
 
     <img src="http://helpinghandcharity.org/wp-content/uploads/2012/04/make-a-wish-quote-1.jpg">
@@ -39,14 +40,14 @@
         <h3 id="wish_reason_title">
           <strong>Razão do desejo:</strong>
         </h3>
-        <p id="wish_reason_text">{{wish.wishReason}}</p>
+        <p id="wish_reason_text">{{wish.reason}}</p>
       </div>
       <div id="wish_description">
 
         <h3 id="wish_description_title">
           <strong>Descrição do desejo:</strong>
         </h3>
-        <p id="wish_description_text">{{wish.wishDescription}}</p>
+        <p id="wish_description_text">{{wish.description}}</p>
       </div>
     </ion-card-content>
     <ion-item class="item item-block item-ios">

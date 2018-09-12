@@ -1,3 +1,28 @@
 page-edit {
+    ion-card-content {
+        padding-top: 3vh;
+    }
 
+    #card_header{
+        ion-label{
+            position: relative;
+        }
+        .wish_state{
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+        .wish_state.pending{
+            background-color: red
+        }
+        .wish_state.in-progress{
+            background-color: yellow
+        }
+        .wish_state.concluded{
+            background-color: green
+        }
+        .wish_state.concluded{
+            background-color: grey
+        }
+    }
 }
