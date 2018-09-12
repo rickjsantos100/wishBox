@@ -18,22 +18,39 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-
-  <ion-card *ngFor="let movie of movie_list">
-    <ion-item>
-      <h2 class="feed_title">{{movie.original_title}}</h2>
-      <p class="feed_date">{{movie.release_date}}</p>
+  <ion-card>
+    <ion-item id="card_header">
+      <h2 class="wish_title">
+        <strong>Um desejo a ser completado</strong>
+      </h2>
+      <p class="wish_creation_date">Criado a {{wish.createdAt}}</p>
+      <ion-badge class="wish_state pending" *ngIf="wish.fulfillmentState === 'pending'">Pendente</ion-badge>
+      <ion-badge class="wish_state in-progress" *ngIf="wish.fulfillmentState === 'inProgress'" >Em progresso</ion-badge>
+      <ion-badge class="wish_state concluded" *ngIf="wish.fulfillmentState === 'concluded'" >Concluido</ion-badge>
     </ion-item>
 
-    <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path">
+    <img src="http://helpinghandcharity.org/wp-content/uploads/2012/04/make-a-wish-quote-1.jpg">
 
     <ion-card-content>
-      <p>{{movie.overview}}</p>
+      <div id="wish_reason">
+
+        <h3 id="wish_reason_title">
+          <strong>Razão do desejo:</strong>
+        </h3>
+        <p id="wish_reason_text">{{wish.wishReason}}</p>
+      </div>
+      <div id="wish_description">
+
+        <h3 id="wish_description_title">
+          <strong>Descrição do desejo:</strong>
+        </h3>
+        <p id="wish_description_text">{{wish.wishDescription}}</p>
+      </div>
     </ion-card-content>
-    <button ion-button block (click)="navToDetailsPage(movie)">Detalhes</button>
+    <button ion-button block (click)="navToEditPage(wish)">Editar Desejo</button>
   </ion-card>
 
   <ion-infinite-scroll (ionInfinite)="handleInfiniteScroll($event)">
-      <ion-infinite-scroll-content></ion-infinite-scroll-content>
-    </ion-infinite-scroll>
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

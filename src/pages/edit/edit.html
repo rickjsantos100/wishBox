@@ -1,0 +1,46 @@
+<!--
+  Generated template for the EditPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Editar Desejo</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-item id="card_header">
+        <h2 class="wish_title">
+          <strong>Um desejo a ser completado</strong>
+        </h2>
+        <p class="wish_creation_date">Criado a {{wish.createdAt}}</p>
+        <ion-badge class="wish_state pending" *ngIf="wish.fulfillmentState === 'pending'">Pendente</ion-badge>
+        <ion-badge class="wish_state in-progress" *ngIf="wish.fulfillmentState === 'inProgress'" >Em progresso</ion-badge>
+        <ion-badge class="wish_state concluded" *ngIf="wish.fulfillmentState === 'concluded'" >Concluido</ion-badge>
+      </ion-item>
+  
+      <img src="http://helpinghandcharity.org/wp-content/uploads/2012/04/make-a-wish-quote-1.jpg">
+  
+      <ion-card-content>
+        <div id="wish_reason">
+  
+          <h3 id="wish_reason_title">
+            <strong>Razão do desejo:</strong>
+          </h3>
+          <p id="wish_reason_text">{{wish.wishReason}}</p>
+        </div>
+        <div id="wish_description">
+  
+          <h3 id="wish_description_title">
+            <strong>Descrição do desejo:</strong>
+          </h3>
+          <p id="wish_description_text">{{wish.wishDescription}}</p>
+        </div>
+      </ion-card-content>
+      <button ion-button block (click)="navToEditPage(wish)">Editar Desejo</button>
+</ion-content>

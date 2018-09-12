@@ -1,4 +1,4 @@
-import { ConfigProvider } from './../../providers/config/config';
+import { ConfigProvider } from '../../providers/config/config'
 import { TabsPage } from '../tabs/tabs';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';

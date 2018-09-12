@@ -1,6 +1,5 @@
-import { TabsPage } from './../pages/tabs/tabs';
-import { ConfigProvider } from './../providers/config/config';
-import { IntroPage } from '../pages/intro/intro';
+import { TabsPage } from '../pages/tabs/tabs'
+import { ConfigProvider } from '../providers/config/config'
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -23,11 +22,11 @@ export class MyApp {
   }
 
   getInitialPage(){
-    const showSlider = this.configProvider.getConfigData("showSlider") 
-    if(showSlider){
-      return IntroPage;
-    }else{
+    // const showSlider = this.configProvider.getConfigData("showSlider") 
+    // if(showSlider ){
+    //   return IntroPage;
+    // }else{
       return TabsPage;
-    }
+    // }
   }
 }

@@ -1,4 +1,4 @@
-import { DetailsPage } from './../details/details';
+import { EditPage } from './../edit/edit';
 import { MovieProvider } from '../../providers/movie/movie';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
@@ -20,34 +20,60 @@ import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-an
 })
 export class FeedPage {
 
-  public movie_list = new Array<object>();
   public loader;
   public refresher;
   public infiniteScroll;
   public currentPage = 1
+
+  public wish = {
+    id:"aa8sf765a",
+    createdAt: this.getCurrentDate(),
+    wishReason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultricies, nisi nec luctus porta, justo elitjoin efficitur ligula, in interdum est diam vitae dolor. Duis dignissim nisl eleifend risus bibendum, nec vestibulum massa congue.",
+    wishDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultricies, nisi nec luctus porta, justo elit efficitur ligula, in interdum est diam vitae dolor. Duis dignissim nisl eleifend risus bibendum, nec vestibulum massa congue. Mauris pretium, sem sit amet gravida porttitor, purus ante porta odio, in convallis lacus ipsum et ante. Maecenas mattis metus urna, at placerat arcu auctor in. Phasellus vel enim odio. Phasellus vel venenatis ligula. Mauris porttitor, ante nec fermentum laoreet, massa enim eleifend felis, non malesuada neque turpis a tortor. Ut nec mauris tempus, posuere eros eget, congue nulla.L Aenean feugiat fermentum ante sed ultrices. Curabitur consectetur sollicitudin faucibus. Nullam aliquam nunc ac suscipit fringilla. Donec nec dui et odio molestie rutrum.",
+    fulfillmentState: "pending",
+  }
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private movieProvider: MovieProvider, public loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
     this.presentLoader();
-    this.getLatestMovies();
+    this.getWishes();
+  }
+
+  getCurrentDate() {
+    const today = new Date();
+    const dd = today.getDate();
+    const mm = today.getMonth() + 1;
+    const yyyy = today.getFullYear();
+    let finalDate: string = "";
+    if (dd < 10) {
+      finalDate += '0' + dd;
+    }
+    if (mm < 10) {
+      finalDate += '0' + mm;
+    }
+    return dd + '/' + mm + '/' + yyyy;
   }
 
 
 
-  getLatestMovies() {
-    this.movieProvider.getLatestMovies(this.currentPage).subscribe(
-      data => {
-        const response = (data as any);
-        this.movie_list = this.movie_list.concat(response.results)
-        this.handleLoaders()
-      },
-      error => {
-        this.handleLoaders()
-        console.log(error)
-      }
-    )
+  // getLatestMovies() {
+  //   this.movieProvider.getLatestMovies(this.currentPage).subscribe(
+  //     data => {
+  //       const response = (data as any);
+  //       // this.movie_list = this.movie_list.concat(response.results)
+  //       this.handleLoaders()
+  //     },
+  //     error => {
+  //       this.handleLoaders()
+  //       console.log(error)
+  //     }
+  //   )
+  // }
+
+  getWishes() {
+    this.handleLoaders()
   }
 
   handleLoaders() {
@@ -62,8 +88,9 @@ export class FeedPage {
     }
   }
 
-  navToDetailsPage(movie) {
-    this.navCtrl.push(DetailsPage, { movieId: movie.id })
+  navToEditPage(wish) {
+    console.log("navToEditPage(wish) ",wish)
+    this.navCtrl.push(EditPage, { wish:wish })
   }
 
   presentLoader() {
@@ -75,12 +102,12 @@ export class FeedPage {
 
   handleRefresher(refresher) {
     this.refresher = refresher;
-    this.getLatestMovies();
+    this.getWishes();
   }
 
   handleInfiniteScroll(infiniteScroll) {
     this.infiniteScroll = infiniteScroll;
     this.currentPage = ++this.currentPage;
-    this.getLatestMovies();
+    this.getWishes();
   }
 }
