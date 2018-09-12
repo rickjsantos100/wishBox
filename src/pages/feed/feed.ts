@@ -48,12 +48,16 @@ export class FeedPage {
     let finalDate: string = "";
     if (dd < 10) {
       finalDate += '0' + dd;
+    }else{
+      finalDate +=  dd;
+
     }
-    finalDate += dd 
+    finalDate += '/'
     if (mm < 10) {
       finalDate += '0' + mm;
+    }else{
+      finalDate += mm;
     }
-    finalDate += ('/'+mm)
     finalDate += ('/'+yyyy)
     return finalDate;
   }

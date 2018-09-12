@@ -23,14 +23,20 @@
 
 
 <ion-content padding>
+
   <div id="wish_fulfillment_stage" *ngIf="wish">
     <h3 id="wish_fulfillment_stage_title">
       <strong>Estado de execução do desejo:</strong>
     </h3>
     <ion-item>
-      <!-- <ion-input #wishTitleInput [value]="wish.title" (keyup.enter)="saveWishTitle(wishTitleInput.value)"> clearInput></ion-input> -->
-    </ion-item>
-    <button clear="" ion-button="" item-end="" (click)="saveWishFulfillmentStage()" class="disable-hover item-button button button-ios button-clear button-clear-ios">
+        <ion-select #wishFulfillmentStateSelect [(ngModel)]="wish.fulfillmentState">
+          <ion-option value="pending">Pendente</ion-option>
+          <ion-option value="inProgress">Em progresso</ion-option>
+          <ion-option value="completed">Concluído</ion-option>
+          <ion-option value="rejected">Rejeitado</ion-option>
+        </ion-select>
+      </ion-item>
+    <button clear="" ion-button="" item-end="" (click)="saveWishFulfillmentState(wishFulfillmentStateSelect.value)" class="disable-hover item-button button button-ios button-clear button-clear-ios">
       <span class="button-inner">Guardar</span>
       <div class="button-effect"></div>
     </button>

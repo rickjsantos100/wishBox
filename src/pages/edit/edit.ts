@@ -1,3 +1,4 @@
+import { EditWishFulfillmentStateModalPage } from './../modals/edit-wish-fulfillment-state-modal/edit-wish-fulfillment-state-modal';
 import { EditWishTitleModalPage } from '../modals/edit-wish-title-modal/edit-wish-title-modal';
 import { EditWishDescriptionModalPage } from '../modals/edit-wish-description-modal/edit-wish-description-modal';
 import { EditWishReasonModalPage } from '../modals/edit-wish-reason-modal/edit-wish-reason-modal';
@@ -29,6 +30,11 @@ export class EditPage {
 
   editWishTitle(){
     const modal = this.modalController.create(EditWishTitleModalPage,{wish:this.wish});
+    modal.present();
+  }
+
+  editWishFulfillmentState(){
+    const modal = this.modalController.create(EditWishFulfillmentStateModalPage,{wish:this.wish});
     modal.present();
   }
 

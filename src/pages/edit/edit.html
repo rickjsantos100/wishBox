@@ -22,16 +22,18 @@
       <p class="wish_creation_date">Criado a
         <strong>{{wish.createdAt}}</strong>
       </p>
-      <ion-badge class="wish_state pending" *ngIf="wish.fulfillmentState === 'pending'">Pendente</ion-badge>
-      <ion-badge class="wish_state in-progress" *ngIf="wish.fulfillmentState === 'inProgress'">Em progresso</ion-badge>
-      <ion-badge class="wish_state concluded" *ngIf="wish.fulfillmentState === 'concluded'">Concluido</ion-badge>
-      <ion-badge class="wish_state rejected" *ngIf="wish.fulfillmentState === 'rejected'">Rejeitado</ion-badge>
+      <div (click)="editWishFulfillmentState()">
+        <ion-badge class="wish_state pending" *ngIf="wish.fulfillmentState === 'pending'">Pendente</ion-badge>
+        <ion-badge class="wish_state in-progress" *ngIf="wish.fulfillmentState === 'inProgress'">Em progresso</ion-badge>
+        <ion-badge class="wish_state concluded" *ngIf="wish.fulfillmentState === 'completed'">Concluído</ion-badge>
+        <ion-badge class="wish_state rejected" *ngIf="wish.fulfillmentState === 'rejected'">Rejeitado</ion-badge>
+      </div>
     </ion-item>
 
     <img src="http://helpinghandcharity.org/wp-content/uploads/2012/04/make-a-wish-quote-1.jpg">
 
     <ion-card-content>
-      <ion-grid>
+      <ion-grid id="wish_content">
         <ion-row id="wish_reason">
           <ion-row col-12>
             <ion-col col-8>
@@ -44,7 +46,7 @@
             </ion-col>
           </ion-row>
           <ion-row>
-            <p id="wish_reason_text" (click)="editWishReason()">{{wish.reason}}</p>
+            <p class="wish_text" id="wish_reason_text" (click)="editWishReason()">{{wish.reason}}</p>
           </ion-row>
         </ion-row>
         <ion-row id="wish_description" col-12>
@@ -59,7 +61,7 @@
             </ion-col>
           </ion-row>
           <ion-row>
-            <p id="wish_description_text" (click)="editWishDescription()">{{wish.description}}</p>
+            <p class="wish_text" id="wish_description_text" (click)="editWishDescription()">{{wish.description}}</p>
           </ion-row>
         </ion-row>
       </ion-grid>

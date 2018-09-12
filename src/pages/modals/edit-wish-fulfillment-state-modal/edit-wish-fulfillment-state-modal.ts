@@ -15,11 +15,24 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class EditWishFulfillmentStateModalPage {
 
+  public wish;
+  public gender;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditWishFulfillmentStateModalPage');
+    this.wish=this.navParams.get("wish")
+  }
+
+  closeModal(){
+    this.navCtrl.pop();
+  }
+
+  saveWishFulfillmentState(value){
+    this.wish.fulfillmentState = value;
+    this.navCtrl.pop(this.wish);
   }
 
 }
