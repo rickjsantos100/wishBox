@@ -23,10 +23,12 @@
       <h2 class="wish_title">
         <strong>Um desejo a ser completado</strong>
       </h2>
-      <p class="wish_creation_date">Criado a {{wish.createdAt}}</p>
+      <p class="wish_creation_date">Criado a
+        <strong>{{wish.createdAt}}</strong>
+      </p>
       <ion-badge class="wish_state pending" *ngIf="wish.fulfillmentState === 'pending'">Pendente</ion-badge>
-      <ion-badge class="wish_state in-progress" *ngIf="wish.fulfillmentState === 'inProgress'" >Em progresso</ion-badge>
-      <ion-badge class="wish_state concluded" *ngIf="wish.fulfillmentState === 'concluded'" >Concluido</ion-badge>
+      <ion-badge class="wish_state in-progress" *ngIf="wish.fulfillmentState === 'inProgress'">Em progresso</ion-badge>
+      <ion-badge class="wish_state concluded" *ngIf="wish.fulfillmentState === 'concluded'">Concluido</ion-badge>
     </ion-item>
 
     <img src="http://helpinghandcharity.org/wp-content/uploads/2012/04/make-a-wish-quote-1.jpg">
@@ -47,7 +49,12 @@
         <p id="wish_description_text">{{wish.wishDescription}}</p>
       </div>
     </ion-card-content>
-    <button ion-button block (click)="navToEditPage(wish)">Editar Desejo</button>
+    <ion-item class="item item-block item-ios">
+        <button clear="" ion-button="" item-end=""  (click)="navToEditPage(wish)" class="disable-hover item-button button button-ios button-clear button-clear-ios">
+          <span class="button-inner">Edit Wish</span>
+          <div class="button-effect" ></div>
+        </button>
+    </ion-item>
   </ion-card>
 
   <ion-infinite-scroll (ionInfinite)="handleInfiniteScroll($event)">

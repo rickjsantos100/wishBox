@@ -14,33 +14,38 @@
 
 
 <ion-content padding>
+  <div *ngIf="wish">
     <ion-item id="card_header">
-        <h2 class="wish_title">
-          <strong>Um desejo a ser completado</strong>
-        </h2>
-        <p class="wish_creation_date">Criado a {{wish.createdAt}}</p>
-        <ion-badge class="wish_state pending" *ngIf="wish.fulfillmentState === 'pending'">Pendente</ion-badge>
-        <ion-badge class="wish_state in-progress" *ngIf="wish.fulfillmentState === 'inProgress'" >Em progresso</ion-badge>
-        <ion-badge class="wish_state concluded" *ngIf="wish.fulfillmentState === 'concluded'" >Concluido</ion-badge>
-      </ion-item>
-  
-      <img src="http://helpinghandcharity.org/wp-content/uploads/2012/04/make-a-wish-quote-1.jpg">
-  
-      <ion-card-content>
-        <div id="wish_reason">
-  
-          <h3 id="wish_reason_title">
-            <strong>Razão do desejo:</strong>
-          </h3>
-          <p id="wish_reason_text">{{wish.wishReason}}</p>
-        </div>
-        <div id="wish_description">
-  
-          <h3 id="wish_description_title">
-            <strong>Descrição do desejo:</strong>
-          </h3>
-          <p id="wish_description_text">{{wish.wishDescription}}</p>
-        </div>
-      </ion-card-content>
-      <button ion-button block (click)="navToEditPage(wish)">Editar Desejo</button>
+      <h2 class="wish_title">
+        <strong>Um desejo a ser completado</strong>
+      </h2>
+      <p class="wish_creation_date">Criado a
+        <strong>{{wish.createdAt}}</strong>
+      </p>
+      <ion-badge class="wish_state pending" *ngIf="wish.fulfillmentState === 'pending'">Pendente</ion-badge>
+      <ion-badge class="wish_state in-progress" *ngIf="wish.fulfillmentState === 'inProgress'">Em progresso</ion-badge>
+      <ion-badge class="wish_state concluded" *ngIf="wish.fulfillmentState === 'concluded'">Concluido</ion-badge>
+    </ion-item>
+
+    <img src="http://helpinghandcharity.org/wp-content/uploads/2012/04/make-a-wish-quote-1.jpg">
+
+    <ion-card-content>
+      <div id="wish_reason">
+        <h3 id="wish_reason_title">
+          <strong>Razão do desejo:</strong>
+        </h3>
+        <p id="wish_reason_text" (click)="toggleEditWishReason()" *ngIf="!editWishReason">{{wish.wishReason}}</p>
+        <ion-item *ngIf="editWishReason">
+          <ion-textarea type="text" [value]="wish.wishReason" ></ion-textarea>
+        </ion-item>
+      </div>
+      <div id="wish_description">
+
+        <h3 id="wish_description_title">
+          <strong>Descrição do desejo:</strong>
+        </h3>
+        <p id="wish_description_text">{{wish.wishDescription}}</p>
+      </div>
+    </ion-card-content>
+  </div>
 </ion-content>
