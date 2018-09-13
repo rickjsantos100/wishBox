@@ -7,12 +7,37 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>createWish</ion-title>
+    <ion-title>Criar Desejo</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+    <form id="createWishForm" (ngSubmit)="createWish()">
+        <ion-item>
+          <ion-label>Título do desejo</ion-label>
+          <ion-input type="text"  [(ngModel)]="wish.title"  placeholder="Título" name="title"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Estado de execução do desejo</ion-label>
+            <ion-select  [(ngModel)]="wish.fulfillmentState" name="wishFulfillmentSelect">
+              <ion-option value="pending">Pendente</ion-option>
+              <ion-option value="inProgress">Em progresso</ion-option>
+              <ion-option value="completed">Concluído</ion-option>
+              <ion-option value="rejected">Rejeitado</ion-option>
+            </ion-select>
+          </ion-item>
+        <ion-item>
+            <ion-label>Razão do desejo</ion-label>
+            <ion-textarea  [(ngModel)]="wish.reason"  placeholder="Razão" name="description"></ion-textarea>
+          </ion-item>
+        <ion-item>
+          <ion-label>Descrição do desejo</ion-label>
+          <ion-textarea   [(ngModel)]="wish.description" placeholder="Descrição" name="description"></ion-textarea>
+        </ion-item>
+        <button ion-button type="submit" block>Criar Desejo</button>
+      </form>
 
 </ion-content>

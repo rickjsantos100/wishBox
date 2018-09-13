@@ -29,8 +29,7 @@ export class EditWishReasonModalPage {
     this.navCtrl.pop(); 
   } 
 
-  saveWishReason(value) {
-    this.wish.reason = value;
+  saveWishReason() {
     this.navCtrl.pop(this.wish);
   }
 

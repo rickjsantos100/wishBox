@@ -28,9 +28,9 @@
       <strong>Razão do desejo:</strong>
     </h3>
     <ion-item>
-      <ion-textarea #wishReasonTextarea [value]="wish.reason"  clearInput></ion-textarea>
+      <ion-textarea   [(ngModel)]="wish.reason"  [value]="wish.reason" placeholder="Razão"  clearInput></ion-textarea>
     </ion-item>
-    <button clear="" ion-button="" item-end="" (click)="saveWishReason(wishReasonTextarea.value)" class="disable-hover item-button button button-ios button-clear button-clear-ios">
+    <button clear="" ion-button="" item-end="" (click)="saveWishReason()" class="disable-hover item-button button button-ios button-clear button-clear-ios">
       <span class="button-inner">Guardar</span>
       <div class="button-effect"></div>
     </button>

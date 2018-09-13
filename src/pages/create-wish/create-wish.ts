@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { getCurrentDate } from '../../utils';
 
 /**
  * Generated class for the CreateWishPage page.
@@ -15,11 +16,24 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class CreateWishPage {
 
+  public wish = {
+    id: null,
+    createdAt: getCurrentDate(),
+    title:"",
+    reason: "",
+    description: "",
+    fulfillmentState: "pending",
+  }
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CreateWishPage');
+  }
+
+  createwish(){
+    
   }
 
 }

@@ -28,9 +28,9 @@
       <strong>Título do desejo:</strong>
     </h3>
     <ion-item>
-      <ion-input #wishTitleInput [value]="wish.title" (keyup.enter)="saveWishTitle(wishTitleInput.value)"> clearInput></ion-input>
+      <ion-input  [(ngModel)]="wish.title"   [value]="wish.title" (keyup.enter)="saveWishTitle()" placeholder="Título"  clearInput></ion-input>
     </ion-item>
-    <button clear="" ion-button="" item-end="" (click)="saveWishTitle(wishTitleInput.value)" class="disable-hover item-button button button-ios button-clear button-clear-ios">
+    <button clear="" ion-button="" item-end="" (click)="saveWishTitle()" class="disable-hover item-button button button-ios button-clear button-clear-ios">
       <span class="button-inner">Guardar</span>
       <div class="button-effect"></div>
     </button>

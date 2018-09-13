@@ -30,8 +30,7 @@ export class EditWishTitleModalPage {
     this.navCtrl.pop();
   }
 
-  saveWishTitle(value){
-    this.wish.title = value;
+  saveWishTitle(){
     this.navCtrl.pop(this.wish);
   }
 
