@@ -1,3 +1,4 @@
+import { FirebaseAccessProvider } from './../../providers/firebase-access/firebase-access';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { getCurrentDate } from '../../utils';
@@ -25,15 +26,15 @@ export class CreateWishPage {
     fulfillmentState: "pending",
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public firebaseAccessProvider:FirebaseAccessProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CreateWishPage');
   }
 
-  createwish(){
-    
+  createWish(){
+    this.firebaseAccessProvider.addWish();
   }
 
 }

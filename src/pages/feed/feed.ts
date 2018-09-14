@@ -25,7 +25,6 @@ export class FeedPage {
   public currentPage = 1
 
   public wish = {
-    id:"aa8sf765a",
     createdAt: getCurrentDate(),
     title:"Um desejo a ser completado",
     reason: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultricies, nisi nec luctus porta, justo elitjoin efficitur ligula, in interdum est diam vitae dolor. Duis dignissim nisl eleifend risus bibendum, nec vestibulum massa congue.",
