@@ -1,9 +1,9 @@
+
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-// import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import {  AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { AngularFirestoreDocument } from '../../../node_modules/angularfire2/firestore';
 import { getCurrentDate } from '../../utils';
+import { Observable } from '../../../node_modules/rxjs';
+import { AngularFirestoreCollection, AngularFirestore } from '../../../node_modules/@angular/fire/firestore';
 
 
 /*
@@ -16,15 +16,19 @@ import { getCurrentDate } from '../../utils';
 export class FirebaseAccessProvider {
 
   public wishesCollection : AngularFirestoreCollection<Object>;
-  public wishes;
+  public wishes: Observable<any[]>;
+  ;
 
-  constructor(public http: HttpClient, private angularFirestore: AngularFirestore) {
+  constructor(public http: HttpClient, public angularFirestore: AngularFirestore) {
     console.log('Hello FirebaseAccessProvider Provider');
+    // this.wishesCollection = angularFirestore.collection<Object>("wishes");
+    // this.wishes = this.wishesCollection.snapshotChanges();
 
-    console.log("rruuuuuuuuunnNNNNING");
-    this.wishesCollection = angularFirestore.collection<Object>("wishes");
-    this.wishes = this.wishesCollection.valueChanges()
-    this.wishesCollection.get().subscribe(data=>{console.log("GGEEETTTTT ",data);})
+  }
+
+  getWishes(){
+    return this.angularFirestore.collection('wishes').valueChanges();
+
   }
 
   addWish() {

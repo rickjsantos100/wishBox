@@ -20,11 +20,10 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpClientModule } from '@angular/common/http';
 
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { FirebaseAccessProvider } from '../providers/firebase-access/firebase-access';
-import { AngularFirestoreModule } from "angularfire2/firestore";
 
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireModule } from '../../node_modules/@angular/fire';
 
 @NgModule({
   declarations: [
@@ -45,7 +44,6 @@ import { AngularFirestoreModule } from "angularfire2/firestore";
     EditWishTitleModalPageModule,
     EditWishFulfillmentStateModalPageModule,
     
-    // AngularFireDatabaseModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule
   ],
