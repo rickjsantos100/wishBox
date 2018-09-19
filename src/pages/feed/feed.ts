@@ -2,7 +2,6 @@ import { FirebaseAccessProvider } from './../../providers/firebase-access/fireba
 import { EditPage } from '../edit/edit';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
-import { map } from 'rxjs/operators';
 
 /**
  * Generated class for the FeedPage page.
@@ -25,7 +24,9 @@ export class FeedPage {
   public infiniteScroll;
   public currentPage = 1
   
-  public wishes;
+  public wishes = [];
+
+  public test
 
   constructor(public navCtrl: NavController, public navParams: NavParams,  public loadingCtrl: LoadingController,  public firebaseAccessProvider: FirebaseAccessProvider) {
   }
@@ -40,13 +41,20 @@ export class FeedPage {
   }
 
   getWishes() {
-    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA, ",this.firebaseAccessProvider.getWishes().map(actions => {
-      return actions.map(a => {
-        const data = a.payload.doc.data() ;
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      });
-    }));
+
+    // SnapshotChanges Method
+
+    this.firebaseAccessProvider.getWishes().subscribe(data=>{
+      data.map(actions => {
+          const data = actions.payload.doc.data() ;
+          const id = actions.payload.doc.id;
+          this.wishes.push({ id, ...data })
+      })
+      this.handleLoaders()
+    })
+    
+    // ValueChanges Method
+    // 
     // this.firebaseAccessProvider.getWishes().subscribe(data=>{
     //   console.log("BBBBBBBBBBBBBBBBBBBBBBBBB ",data);
     //   this.wishes = data

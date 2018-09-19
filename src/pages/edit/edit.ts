@@ -1,3 +1,4 @@
+import { FirebaseAccessProvider } from './../../providers/firebase-access/firebase-access';
 import { EditWishFulfillmentStateModalPage } from './../modals/edit-wish-fulfillment-state-modal/edit-wish-fulfillment-state-modal';
 import { EditWishTitleModalPage } from '../modals/edit-wish-title-modal/edit-wish-title-modal';
 import { EditWishDescriptionModalPage } from '../modals/edit-wish-description-modal/edit-wish-description-modal';
@@ -21,7 +22,7 @@ export class EditPage {
 
   public wish;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalController: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalController: ModalController, public firebaseAccessProvider: FirebaseAccessProvider) {
   }
 
   ionViewDidEnter() {
@@ -46,6 +47,10 @@ export class EditPage {
   editWishDescription(){
     const modal = this.modalController.create(EditWishDescriptionModalPage,{wish:this.wish});
     modal.present();
+  }
+
+  saveWish(){
+    this.firebaseAccessProvider.updateWish(this.wish);
   }
 
 
