@@ -27,8 +27,7 @@ export class FirebaseAccessProvider {
   }
 
   getWishes(){
-    return this.angularFirestore.collection('wishes').valueChanges();
-
+    return this.angularFirestore.collection('wishes').snapshotChanges();
   }
 
   addWish() {
@@ -41,6 +40,10 @@ export class FirebaseAccessProvider {
     //   fulfillmentState: "pending",
     // });
   } 
+
+  updateWish(){
+
+  }
 
   getObservableWishes(){
     return this.wishes
