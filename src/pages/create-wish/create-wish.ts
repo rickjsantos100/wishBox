@@ -34,7 +34,7 @@ export class CreateWishPage {
   }
 
   createWish(){
-    this.firebaseAccessProvider.addWish();
+    this.firebaseAccessProvider.addWish(this.wish);
   }
 
 }
