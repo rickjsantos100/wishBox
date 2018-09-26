@@ -1,9 +1,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { getCurrentDate } from '../../utils';
-import { Observable } from '../../../node_modules/rxjs';
-import { AngularFirestoreCollection, AngularFirestore } from '../../../node_modules/@angular/fire/firestore';
+import {  AngularFirestore } from '../../../node_modules/@angular/fire/firestore';
 
 
 /*
@@ -15,7 +13,6 @@ import { AngularFirestoreCollection, AngularFirestore } from '../../../node_modu
 @Injectable()
 export class FirebaseAccessProvider {
 
-  public wishesCollection : AngularFirestoreCollection<Object>;
 
   constructor(public http: HttpClient, public angularFirestore: AngularFirestore) {
     console.log('Hello FirebaseAccessProvider Provider');
@@ -27,7 +24,7 @@ export class FirebaseAccessProvider {
 
   addWish(wish) {
     console.log("CREATING");
-    return this.wishesCollection.add(wish);
+    return this.angularFirestore.collection('wishes').add(wish);
   } 
 
   updateWish(wish){

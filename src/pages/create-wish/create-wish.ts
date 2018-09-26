@@ -18,7 +18,6 @@ import { getCurrentDate } from '../../utils';
 export class CreateWishPage {
 
   public wish = {
-    id: null,
     createdAt: getCurrentDate(),
     title:"",
     reason: "",

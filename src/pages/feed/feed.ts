@@ -23,44 +23,46 @@ export class FeedPage {
   public refresher;
   public infiniteScroll;
   public currentPage = 1
-  
+
   public wishes = [];
 
-  public test
-
-  constructor(public navCtrl: NavController, public navParams: NavParams,  public loadingCtrl: LoadingController,  public firebaseAccessProvider: FirebaseAccessProvider) {
-  }
-
-  ionViewDidLoad() {
-    this.loadFeed();
-  }
-
-  loadFeed(){
-    this.presentLoader();
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public firebaseAccessProvider: FirebaseAccessProvider) {
     this.getWishes();
   }
 
+  ionViewDidLoad() {
+    this.presentLoader();
+  }
+
+
   getWishes() {
-
-    // SnapshotChanges Method
-
-    this.firebaseAccessProvider.getWishes().subscribe(data=>{
+    this.firebaseAccessProvider.getWishes().subscribe(data => {
+      this.wishes = [];
       data.map(actions => {
-          const data = actions.payload.doc.data() ;
-          const id = actions.payload.doc.id;
-          this.wishes.push({ id, ...data })
+        const data = actions.payload.doc.data();
+        const id = actions.payload.doc.id;
+        this.wishes.push({ id, ...data });
       })
+      console.log('TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT');
+      
       this.handleLoaders()
     })
-    
-    // ValueChanges Method
-    // 
-    // this.firebaseAccessProvider.getWishes().subscribe(data=>{
-    //   console.log("BBBBBBBBBBBBBBBBBBBBBBBBB ",data);
-    //   this.wishes = data
-    //   this.handleLoaders()
-    // })
   }
+
+  //  Helper function for debuging
+  // printTime(string) {
+  //   var currentdate = new Date();
+  //   var datetime = "Last Sync: " + currentdate.getDate() + "/"
+  //     + (currentdate.getMonth() + 1) + "/"
+  //     + currentdate.getFullYear() + " @ "
+  //     + currentdate.getHours() + ":"
+  //     + currentdate.getMinutes() + ":"
+  //     + currentdate.getSeconds() + ":"
+  //     + currentdate.getMilliseconds();
+
+  //   console.log('-------------------------------------------------');
+  //   console.log(string, ' time of execution ', datetime);
+  // }
 
   handleLoaders() {
     if (this.loader) {
@@ -74,10 +76,8 @@ export class FeedPage {
     // }
   }
 
-  
-
   navToEditPage(wish) {
-    this.navCtrl.push(EditPage, { wish:wish })
+    this.navCtrl.push(EditPage, { wish: wish })
   }
 
   presentLoader() {
@@ -89,12 +89,12 @@ export class FeedPage {
 
   handleRefresher(refresher) {
     this.refresher = refresher;
-    this.loadFeed();
-  }
-
-  handleInfiniteScroll(infiniteScroll) {
-    this.infiniteScroll = infiniteScroll;
-    this.currentPage = ++this.currentPage;
     this.getWishes();
   }
+
+  // handleInfiniteScroll(infiniteScroll) {
+  //   this.infiniteScroll = infiniteScroll;
+  //   this.currentPage = ++this.currentPage;
+  //   this.getWishes();
+  // }
 }
