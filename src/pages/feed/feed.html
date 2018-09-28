@@ -18,7 +18,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-card>
+  <ion-card *ngFor="let wish of wishes">
     <ion-item id="card_header">
       <h2 class="wish_title">
         <strong>{{wish.title}}</strong>
@@ -56,9 +56,10 @@
           <div class="button-effect" ></div>
         </button>
     </ion-item>
+
   </ion-card>
 
-  <ion-infinite-scroll (ionInfinite)="handleInfiniteScroll($event)">
+  <!-- <ion-infinite-scroll (ionInfinite)="handleInfiniteScroll($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+  </ion-infinite-scroll> -->
 </ion-content>

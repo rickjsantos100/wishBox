@@ -1,3 +1,4 @@
+import { firebaseConfig } from './../environment/environment';
 import { EditWishFulfillmentStateModalPageModule } from './../pages/modals/edit-wish-fulfillment-state-modal/edit-wish-fulfillment-state-modal.module';
 import { EditWishTitleModalPageModule } from '../pages/modals/edit-wish-title-modal/edit-wish-title-modal.module';
 import { EditWishDescriptionModalPageModule } from '../pages/modals/edit-wish-description-modal/edit-wish-description-modal.module';
@@ -19,6 +20,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpClientModule } from '@angular/common/http';
 
+import { FirebaseAccessProvider } from '../providers/firebase-access/firebase-access';
+
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireModule } from '../../node_modules/@angular/fire';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -37,6 +43,9 @@ import { HttpClientModule } from '@angular/common/http';
     EditWishDescriptionModalPageModule,
     EditWishTitleModalPageModule,
     EditWishFulfillmentStateModalPageModule,
+    
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -46,8 +55,9 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ConfigProvider
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    ConfigProvider,
+    FirebaseAccessProvider
   ]
 })
-export class AppModule {}
+export class AppModule { }
