@@ -1,3 +1,4 @@
+import { FirebaseAccessProvider } from './../../../providers/firebase-access/firebase-access';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
@@ -18,7 +19,7 @@ export class EditWishFulfillmentStateModalPage {
   public wish;
   public gender;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertController: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertController: AlertController,public firebaseAccessProvider:FirebaseAccessProvider) {
   }
 
   ionViewDidLoad() {
@@ -30,9 +31,7 @@ export class EditWishFulfillmentStateModalPage {
     this.navCtrl.pop();
   }
 
-  saveWishFulfillmentState() {
-    this.navCtrl.pop(this.wish);
-  }
+  
 
   showValidationAlert() {
     const prompt = this.alertController.create({
@@ -41,7 +40,8 @@ export class EditWishFulfillmentStateModalPage {
       inputs: [
         {
           name: 'password',
-          placeholder: 'Password'
+          placeholder: 'Password',
+          type: 'password'
         },
       ],
       buttons: [
@@ -53,8 +53,9 @@ export class EditWishFulfillmentStateModalPage {
         },
         {
           text: 'Guardar',
-          handler: data => {
-            if(this.validatePassword(data.password)){
+          handler:  async (data)=>{
+            console.log(';lllllllllllllll ', await this.checkPassword(data.password));
+            if( await this.checkPassword(data.password)){
               this.saveWishFulfillmentState()
             }else{
               return false
@@ -66,12 +67,21 @@ export class EditWishFulfillmentStateModalPage {
     prompt.present();
   }
 
+  async checkPassword(password){
+    return await this.firebaseAccessProvider.checkPassword('ricardo',password); 
+  }
+
   validatePassword(password){
     if(password){
       return true;
     }else{
       return false;
     }
+  }
+
+  saveWishFulfillmentState() {
+    this.firebaseAccessProvider.updateWish(this.wish);
+    this.navCtrl.pop(this.wish);
   }
 
 }

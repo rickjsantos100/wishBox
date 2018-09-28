@@ -43,7 +43,6 @@ export class FeedPage {
         const id = actions.payload.doc.id;
         this.wishes.push({ id, ...data });
       })
-      console.log('TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT');
       
       this.handleLoaders()
     })

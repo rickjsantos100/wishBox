@@ -26,6 +26,7 @@ export class CreateWishPage {
   }
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public firebaseAccessProvider:FirebaseAccessProvider) {
+    this.checkPassword()
   }
 
   ionViewDidLoad() {
@@ -34,6 +35,10 @@ export class CreateWishPage {
 
   createWish(){
     this.firebaseAccessProvider.addWish(this.wish);
+  }
+
+  async checkPassword(){
+    console.log(  await this.firebaseAccessProvider.checkPassword('ricardo','1234')); 
   }
 
 }
