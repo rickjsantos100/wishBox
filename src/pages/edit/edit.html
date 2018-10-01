@@ -16,18 +16,38 @@
 <ion-content padding>
   <div *ngIf="wish">
     <ion-item id="card_header">
-      <h2 class="wish_title" (click)="editWishTitle()">
-        <strong>{{wish.title}}</strong>
-      </h2>
+
+      <ion-row col-12>
+        <ion-col offset-8 col-4 text-right>
+          <div (click)="editWishFulfillmentState()">
+            <ion-badge class="wish_state pending" *ngIf="wish.fulfillmentState === 'pending'">Pendente</ion-badge>
+            <ion-badge class="wish_state in-progress" *ngIf="wish.fulfillmentState === 'inProgress'">Em progresso</ion-badge>
+            <ion-badge class="wish_state concluded" *ngIf="wish.fulfillmentState === 'completed'">Concluído</ion-badge>
+            <ion-badge class="wish_state rejected" *ngIf="wish.fulfillmentState === 'rejected'">Rejeitado</ion-badge>
+          </div>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row col-12>
+        <ion-col col-4>
+          <h2 id="wish_reason_title">
+            <strong>Título do desejo:</strong>
+          </h2>
+        </ion-col>
+        <ion-col col-6>
+            <h3 class="wish_title" (click)="editWishTitle()">
+              <strong>{{wish.title}}</strong>
+            </h3>
+          </ion-col>
+        <ion-col offset-1 col-1 align-items-end>
+          <ion-icon name="create" (click)="editWishTitle()"></ion-icon>
+        </ion-col>
+      </ion-row>
       <p class="wish_creation_date">Criado a
         <strong>{{wish.createdAt}}</strong>
       </p>
-      <div (click)="editWishFulfillmentState()">
-        <ion-badge class="wish_state pending" *ngIf="wish.fulfillmentState === 'pending'">Pendente</ion-badge>
-        <ion-badge class="wish_state in-progress" *ngIf="wish.fulfillmentState === 'inProgress'">Em progresso</ion-badge>
-        <ion-badge class="wish_state concluded" *ngIf="wish.fulfillmentState === 'completed'">Concluído</ion-badge>
-        <ion-badge class="wish_state rejected" *ngIf="wish.fulfillmentState === 'rejected'">Rejeitado</ion-badge>
-      </div>
+
     </ion-item>
 
     <img src="http://helpinghandcharity.org/wp-content/uploads/2012/04/make-a-wish-quote-1.jpg">
@@ -65,6 +85,12 @@
           </ion-row>
         </ion-row>
       </ion-grid>
+      <ion-row id="delete_wish" offset-8 col-4>
+        <button clear="" ion-button="" item-end="" (click)="showDeleteConfirmationAlert()" class="disable-hover item-button button button-ios button-clear button-clear-ios">
+          <span class="button-inner">Delete Wish</span>
+          <div class="button-effect"></div>
+        </button>
+      </ion-row>
     </ion-card-content>
   </div>
 </ion-content>

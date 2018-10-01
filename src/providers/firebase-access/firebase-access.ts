@@ -1,7 +1,8 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {  AngularFirestore } from '../../../node_modules/@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '../../../node_modules/@angular/fire/firestore';
+import { getCurrentDate } from '../../utils';
 
 
 /*
@@ -10,6 +11,14 @@ import {  AngularFirestore } from '../../../node_modules/@angular/fire/firestore
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
+
+
+interface ProtectionInfo {
+  user: string;
+  pass: string;
+}
+
+
 @Injectable()
 export class FirebaseAccessProvider {
 
@@ -18,18 +27,48 @@ export class FirebaseAccessProvider {
     console.log('Hello FirebaseAccessProvider Provider');
   }
 
-  getWishes(){
+  getWishes() {
     return this.angularFirestore.collection('wishes').snapshotChanges();
   }
 
   addWish(wish) {
     console.log("CREATING");
-    return this.angularFirestore.collection('wishes').add(wish);
-  } 
+    return this.angularFirestore.collection('wishes').add({createdAt: getCurrentDate(), ... wish});
+  }
 
-  updateWish(wish){
-    console.log("updateWish(wish){ ", wish);
-    this.angularFirestore.collection('wishes').doc(wish.id).update(wish);
+  updateWish(wish) {
+    console.log("UPDATING");
+    const document= this.angularFirestore.collection(`wishes`).doc(wish.id);
+    delete wish.id;
+    document.update(wish);
+  }
+
+  deleteWish(wish){
+    console.log('DELETING');
+    this.angularFirestore.collection('wishes').doc(wish.id).delete();
+  }
+
+  async checkPassword(user, password) {
+    let correct = false;
+    await new Promise(resolve => {
+      this.angularFirestore.collection('protection', ref => ref.where('user', '==', user)).valueChanges()
+      .subscribe((data : Array<ProtectionInfo>) => {
+        if(this.generateHash(password) === data[0]. pass){
+          correct=true;
+        }
+        resolve();
+      })
+    })
+    return correct;
+  }
+
+  
+
+  generateHash(password) {
+    if(!password){
+      return '';
+    }
+    return String(password.split("").reduce(function (a, b) { a = ((a << 5) - a) + b.charCodeAt(0); return a & a }, 0));
   }
 
 

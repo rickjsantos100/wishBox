@@ -1,3 +1,4 @@
+import { FirebaseAccessProvider } from './../../../providers/firebase-access/firebase-access';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -17,7 +18,7 @@ export class EditWishTitleModalPage {
 
   public wish;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public firebaseAccessProvider: FirebaseAccessProvider) {
   }
 
   ionViewDidLoad() {
@@ -31,6 +32,7 @@ export class EditWishTitleModalPage {
   }
 
   saveWishTitle(){
+    this.firebaseAccessProvider.updateWish(this.wish);
     this.navCtrl.pop(this.wish);
   }
 

@@ -4,7 +4,7 @@ import { EditWishTitleModalPage } from '../modals/edit-wish-title-modal/edit-wis
 import { EditWishDescriptionModalPage } from '../modals/edit-wish-description-modal/edit-wish-description-modal';
 import { EditWishReasonModalPage } from '../modals/edit-wish-reason-modal/edit-wish-reason-modal';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, AlertController, NavController, NavParams, ModalController } from 'ionic-angular';
 
 /**
  * Generated class for the EditPage page.
@@ -22,36 +22,61 @@ export class EditPage {
 
   public wish;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalController: ModalController, public firebaseAccessProvider: FirebaseAccessProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public alertController:AlertController, public modalController: ModalController, public firebaseAccessProvider: FirebaseAccessProvider) {
   }
 
   ionViewDidEnter() {
     this.wish = this.navParams.get("wish")
   }
 
-  editWishTitle(){
-    const modal = this.modalController.create(EditWishTitleModalPage,{wish:this.wish});
+  editWishTitle() {
+    const modal = this.modalController.create(EditWishTitleModalPage, { wish: this.wish });
     modal.present();
   }
 
-  editWishFulfillmentState(){
-    const modal = this.modalController.create(EditWishFulfillmentStateModalPage,{wish:this.wish});
+  editWishFulfillmentState() {
+    const modal = this.modalController.create(EditWishFulfillmentStateModalPage, { wish: this.wish });
     modal.present();
   }
 
-  editWishReason(){
-    const modal = this.modalController.create(EditWishReasonModalPage,{wish:this.wish});
+  editWishReason() {
+    const modal = this.modalController.create(EditWishReasonModalPage, { wish: this.wish });
     modal.present();
   }
 
-  editWishDescription(){
-    const modal = this.modalController.create(EditWishDescriptionModalPage,{wish:this.wish});
+  editWishDescription() {
+    const modal = this.modalController.create(EditWishDescriptionModalPage, { wish: this.wish });
     modal.present();
   }
 
-  saveWish(){
+  saveWish() {
     this.firebaseAccessProvider.updateWish(this.wish);
   }
 
+  showDeleteConfirmationAlert() {
+    const prompt = this.alertController.create({
+      message: `<p>Tens  a certeza que queres eleminar este desejo.</p>`,
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: data => {
+
+          }
+        },
+        {
+          text: 'Confirmar',
+          handler: data => {
+            this.deleteWish();
+            this.navCtrl.pop();
+          }
+        },
+      ]
+    });
+    prompt.present();
+  }
+
+  deleteWish(){
+    this.firebaseAccessProvider.deleteWish(this.wish);
+  }
 
 }

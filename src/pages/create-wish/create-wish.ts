@@ -1,7 +1,7 @@
-import { FirebaseAccessProvider } from './../../providers/firebase-access/firebase-access';
+import { FeedPage } from './../feed/feed';
+import { FirebaseAccessProvider } from '../../providers/firebase-access/firebase-access';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { getCurrentDate } from '../../utils';
+import { App,IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the CreateWishPage page.
@@ -18,22 +18,77 @@ import { getCurrentDate } from '../../utils';
 export class CreateWishPage {
 
   public wish = {
-    createdAt: getCurrentDate(),
-    title:"",
+    title: "",
     reason: "",
     description: "",
     fulfillmentState: "pending",
   }
+  public rootNav = this.app.getRootNav();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public firebaseAccessProvider:FirebaseAccessProvider) {
+  constructor(public app: App, public navCtrl: NavController, public navParams: NavParams, public alertController: AlertController, public firebaseAccessProvider: FirebaseAccessProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CreateWishPage');
   }
 
-  createWish(){
+  createWish() {
     this.firebaseAccessProvider.addWish(this.wish);
+    this.wish =  {
+      title: "",
+      reason: "",
+      description: "",
+      fulfillmentState: "pending",
+    };
+    this.rootNav.push(FeedPage);
+  }
+
+  async validatePassword(user, password) {
+    return await this.firebaseAccessProvider.checkPassword(user, password);
+  }
+
+  showValidationAlert() {
+    const prompt = this.alertController.create({
+      title: 'Validar',
+      message: `<p>Insere a password para validar a criação de um desejo desejo.</p><p>Um desejo apenas poderá ser criado na presença das duas entidades envolvidas.</p>`,
+      inputs: [
+        {
+          name: 'inesPassword',
+          placeholder: 'Inês Password',
+          type: 'password'
+        },
+        {
+          name: 'ricardoPassword',
+          placeholder: 'Ricardo Password',
+          type: 'password'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: data => {
+
+          }
+        },
+        {
+          text: 'Guardar',
+          handler: async (data) => {
+            const ricardoValidated = this.validatePassword('ricardo', data.ricardoPassword);
+            const inesValidated = this.validatePassword('ines', data.inesPassword);
+            Promise.all([ricardoValidated, inesValidated]).then((values) => {
+              console.log('AAAAAAAAA ', values[0]);
+              console.log('AAAAAAAAA ', values[1]);
+              if (values[0] && values[1]) {
+                this.createWish();
+              } else {
+                return false
+              }
+            });
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
 }
