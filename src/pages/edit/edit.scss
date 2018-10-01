@@ -9,14 +9,14 @@ page-edit {
     }
 
     #card_header{
-        ion-label{
-            position: relative;
-        }
-        .wish_state{
-            position: absolute;
-            top: 0;
-            right: 0;
-        }
+        // ion-label{
+        //     position: relative;
+        // }
+        // .wish_state{
+        //     position: absolute;
+        //     top: 0;
+        //     right: 0;
+        // }
         .wish_state.pending{
             background-color: red
         }
@@ -28,6 +28,12 @@ page-edit {
         }
         .wish_state.rejected{
             background-color: grey
+        }
+    }
+
+    #delete_wish{
+        button{
+            color: red
         }
     }
 }

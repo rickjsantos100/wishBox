@@ -1,7 +1,8 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '../../../node_modules/@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '../../../node_modules/@angular/fire/firestore';
+import { getCurrentDate } from '../../utils';
 
 
 /*
@@ -32,12 +33,19 @@ export class FirebaseAccessProvider {
 
   addWish(wish) {
     console.log("CREATING");
-    return this.angularFirestore.collection('wishes').add(wish);
+    return this.angularFirestore.collection('wishes').add({createdAt: getCurrentDate(), ... wish});
   }
 
   updateWish(wish) {
-    console.log("updateWish(wish){ ", wish);
-    this.angularFirestore.collection('wishes').doc(wish.id).update(wish);
+    console.log("UPDATING");
+    const document= this.angularFirestore.collection(`wishes`).doc(wish.id);
+    delete wish.id;
+    document.update(wish);
+  }
+
+  deleteWish(wish){
+    console.log('DELETING');
+    this.angularFirestore.collection('wishes').doc(wish.id).delete();
   }
 
   async checkPassword(user, password) {
@@ -45,9 +53,7 @@ export class FirebaseAccessProvider {
     await new Promise(resolve => {
       this.angularFirestore.collection('protection', ref => ref.where('user', '==', user)).valueChanges()
       .subscribe((data : Array<ProtectionInfo>) => {
-        console.log('AAAAAAAAAAAAA ',this.generateHash(password) );
-        console.log('AAAAAAAAAAAAA ',data[0].pass);
-        if(this.generateHash(password) === data[0].pass){
+        if(this.generateHash(password) === data[0]. pass){
           correct=true;
         }
         resolve();
@@ -59,6 +65,9 @@ export class FirebaseAccessProvider {
   
 
   generateHash(password) {
+    if(!password){
+      return '';
+    }
     return String(password.split("").reduce(function (a, b) { a = ((a << 5) - a) + b.charCodeAt(0); return a & a }, 0));
   }
 

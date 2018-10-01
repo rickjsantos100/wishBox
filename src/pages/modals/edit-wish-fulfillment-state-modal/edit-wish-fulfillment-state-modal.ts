@@ -54,8 +54,7 @@ export class EditWishFulfillmentStateModalPage {
         {
           text: 'Guardar',
           handler:  async (data)=>{
-            console.log(';lllllllllllllll ', await this.checkPassword(data.password));
-            if( await this.checkPassword(data.password)){
+            if( await this.validatePassword(data.password)){
               this.saveWishFulfillmentState()
             }else{
               return false
@@ -67,17 +66,10 @@ export class EditWishFulfillmentStateModalPage {
     prompt.present();
   }
 
-  async checkPassword(password){
+  async validatePassword(password){
     return await this.firebaseAccessProvider.checkPassword('ricardo',password); 
   }
 
-  validatePassword(password){
-    if(password){
-      return true;
-    }else{
-      return false;
-    }
-  }
 
   saveWishFulfillmentState() {
     this.firebaseAccessProvider.updateWish(this.wish);

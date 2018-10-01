@@ -15,7 +15,7 @@
 
 <ion-content padding>
 
-    <form id="createWishForm" (ngSubmit)="createWish()">
+    <form id="createWishForm" (ngSubmit)="showValidationAlert()">
         <ion-item>
           <ion-label>Título do desejo</ion-label>
           <ion-input type="text"  [(ngModel)]="wish.title"  placeholder="Título" name="title"></ion-input>
