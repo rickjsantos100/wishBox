@@ -20,9 +20,12 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpClientModule } from '@angular/common/http';
 
+import { FirebaseStorageProvider } from '../providers/firebase-storage/firebase-storage';
 import { FirebaseAccessProvider } from '../providers/firebase-access/firebase-access';
 
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireModule } from '../../node_modules/@angular/fire';
 
 @NgModule({
@@ -45,7 +48,9 @@ import { AngularFireModule } from '../../node_modules/@angular/fire';
     EditWishFulfillmentStateModalPageModule,
     
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -57,7 +62,8 @@ import { AngularFireModule } from '../../node_modules/@angular/fire';
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     ConfigProvider,
-    FirebaseAccessProvider
+    FirebaseAccessProvider,
+    FirebaseStorageProvider
   ]
 })
 export class AppModule { }

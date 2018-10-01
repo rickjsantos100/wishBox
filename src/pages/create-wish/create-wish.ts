@@ -1,7 +1,8 @@
+import { FirebaseStorageProvider } from './../../providers/firebase-storage/firebase-storage';
 import { FeedPage } from './../feed/feed';
 import { FirebaseAccessProvider } from '../../providers/firebase-access/firebase-access';
 import { Component } from '@angular/core';
-import { App,IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { App, IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the CreateWishPage page.
@@ -25,7 +26,7 @@ export class CreateWishPage {
   }
   public rootNav = this.app.getRootNav();
 
-  constructor(public app: App, public navCtrl: NavController, public navParams: NavParams, public alertController: AlertController, public firebaseAccessProvider: FirebaseAccessProvider) {
+  constructor(public app: App,public navCtrl: NavController,public navParams: NavParams,public alertController: AlertController,public firebaseAccessProvider: FirebaseAccessProvider,public firebaseStorageProvider: FirebaseStorageProvider) {
   }
 
   ionViewDidLoad() {
@@ -34,7 +35,7 @@ export class CreateWishPage {
 
   createWish() {
     this.firebaseAccessProvider.addWish(this.wish);
-    this.wish =  {
+    this.wish = {
       title: "",
       reason: "",
       description: "",
