@@ -28,12 +28,13 @@ export class FirebaseAccessProvider {
   }
 
   getWishes() {
-    return this.angularFirestore.collection('wishes').snapshotChanges();
+    return this.angularFirestore.collection('wishes', ref => ref.orderBy('createdAt')).snapshotChanges();
   }
 
   addWish(wish) {
     console.log("CREATING");
-    return this.angularFirestore.collection('wishes').add({createdAt: getCurrentDate(), ... wish});
+    const date = getCurrentDate();
+    return this.angularFirestore.collection('wishes').add({createdAt: date,displayDate: date.split(' ')[0], ... wish});
   }
 
   updateWish(wish) {

@@ -23,9 +23,13 @@ export class CreateWishPage {
     description: "",
     fulfillmentState: "pending",
   }
-  public rootNav = this.app.getRootNav();
+  public fromFeedPage ;
 
   constructor(public app: App, public navCtrl: NavController, public navParams: NavParams, public alertController: AlertController, public firebaseAccessProvider: FirebaseAccessProvider) {
+  }
+
+  ionViewDidEnter() {
+    this.fromFeedPage = this.navParams.get("fromFeed")
   }
 
   ionViewDidLoad() {
@@ -40,7 +44,11 @@ export class CreateWishPage {
       description: "",
       fulfillmentState: "pending",
     };
-    this.rootNav.push(FeedPage);
+    if(this.fromFeedPage){
+      this.navCtrl.pop();
+    }else{
+      this.app.getRootNav().push(FeedPage);
+    }
   }
 
   async validatePassword(user, password) {
@@ -76,8 +84,6 @@ export class CreateWishPage {
             const ricardoValidated = this.validatePassword('ricardo', data.ricardoPassword);
             const inesValidated = this.validatePassword('ines', data.inesPassword);
             Promise.all([ricardoValidated, inesValidated]).then((values) => {
-              console.log('AAAAAAAAA ', values[0]);
-              console.log('AAAAAAAAA ', values[1]);
               if (values[0] && values[1]) {
                 this.createWish();
               } else {

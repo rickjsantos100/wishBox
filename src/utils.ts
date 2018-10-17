@@ -7,21 +7,47 @@ function getCurrentDate() {
     const dd = today.getDate();
     const mm = today.getMonth() + 1;
     const yyyy = today.getFullYear();
-    let finalDate: string = "";
+
+    const hh = today.getHours();
+    const MM = today.getMinutes();
+    const ss = today.getSeconds();
+
+    let finalDateTime: string = "";
     if (dd < 10) {
-      finalDate += '0' + dd;
+      finalDateTime += '0' + dd;
     }else{
-      finalDate +=  dd;
+      finalDateTime +=  dd;
 
     }
-    finalDate += '/'
+    finalDateTime += '/'
     if (mm < 10) {
-      finalDate += '0' + mm;
+      finalDateTime += '0' + mm;
     }else{
-      finalDate += mm;
+      finalDateTime += mm;
     }
-    finalDate += ('/'+yyyy)
-    return finalDate;
+    finalDateTime += ('/'+yyyy+' ')
+
+
+    if (hh < 10) {
+      finalDateTime += '0' + hh;
+    }else{
+      finalDateTime += hh;
+    }
+    finalDateTime += ':'
+    if (MM < 10) {
+      finalDateTime += '0' + MM;
+    }else{
+      finalDateTime += MM;
+    }
+    finalDateTime += ':'
+    if (ss < 10) {
+      finalDateTime += '0' + ss;
+    }else{
+      finalDateTime += ss;
+    }
+
+    return finalDateTime;
   }
+
 
   export {getCurrentDate}

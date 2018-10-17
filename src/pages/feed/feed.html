@@ -7,10 +7,16 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>feed</ion-title>
+    <ion-title padding-left>
+      <img id='app-logo' src="../../assets/icon/logo-long.png" alt="">
+    </ion-title>
+    <ion-buttons padding-right end>
+      <button ion-button icon-only (click)="openCreateWishPage()">
+        <ion-icon class='header-right' id='add-wish-icon' name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
-</ion-header>
+  </ion-header>
 
 
 <ion-content padding>
@@ -24,7 +30,7 @@
         <strong>{{wish.title}}</strong>
       </h2>
       <p class="wish_creation_date">Criado a
-        <strong>{{wish.createdAt}}</strong>
+        <strong>{{wish.displayDate}}</strong>
       </p>
       <ion-badge class="wish_state pending" *ngIf="wish.fulfillmentState === 'pending'">Pendente</ion-badge>
       <ion-badge class="wish_state in-progress" *ngIf="wish.fulfillmentState === 'inProgress'">Em progresso</ion-badge>

@@ -14,8 +14,27 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
-
-
-[col-12]{
+[col-12] {
     padding: 0
+}
+
+
+.tabbar.show-tabbar {
+    // background-image: none ;
+    border-radius: 100px;
+    width: 95%;
+    left: 2.5%;
+    bottom: 5px !important; 
+}
+
+
+ion-content {
+    .scroll-content {
+        margin-bottom: 0px !important;
+        padding-bottom: 0px !important;
+    }
+    .fixed-content {
+        margin-bottom: 0px !important;
+        padding-bottom: 0px !important;
+    }
 }

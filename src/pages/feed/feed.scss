@@ -1,32 +1,48 @@
 page-feed {
 
-    ion-card-content div{
+        ion-header{
+            ion-navbar{
+                ion-title{
+                    #app-logo{
+                        height: 30px
+                    }
+                }
+                .header-right{
+                    color: #f6784a;
+                }
+            }
+        }
+    .scroll-content {
+        background-image: url(../../assets/imgs/rose-background-edited.jpeg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+    
+    ion-card-content div {
         padding-top: 3vh;
     }
-
-    #card_header{
-        ion-label{
+    
+    #card_header {
+        ion-label {
             position: relative;
         }
-        .wish_state{
+        .wish_state {
             position: absolute;
             top: 0;
             right: 0;
         }
-        .wish_state.pending{
+        .wish_state.pending {
             background-color: red
         }
-        .wish_state.in-progress{
+        .wish_state.in-progress {
             background-color: yellow
         }
-        .wish_state.concluded{
+        .wish_state.concluded {
             background-color: green
         }
-        .wish_state.rejected{
+        .wish_state.rejected {
             background-color: grey
         }
     }
-
-    
-
 }

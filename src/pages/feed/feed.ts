@@ -2,6 +2,7 @@ import { FirebaseAccessProvider } from './../../providers/firebase-access/fireba
 import { EditPage } from '../edit/edit';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { CreateWishPage } from '../create-wish/create-wish';
 
 /**
  * Generated class for the FeedPage page.
@@ -89,6 +90,10 @@ export class FeedPage {
   handleRefresher(refresher) {
     this.refresher = refresher;
     this.getWishes();
+  }
+
+  openCreateWishPage(){
+    this.navCtrl.push(CreateWishPage,{fromFeed:true})
   }
 
   // handleInfiniteScroll(infiniteScroll) {
